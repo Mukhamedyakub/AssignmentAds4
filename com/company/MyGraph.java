@@ -58,3 +58,61 @@ public class MyGraph<T> {
         if (undirected)
             map.get(v2).add(v1);
     }
+
+    /**
+     * Checks if the graph contains a vertex.
+     *
+     * @param v The vertex to check.
+     * @return True if the vertex is in the graph, otherwise false.
+     */
+    public boolean hasVertex(Vertex<T> v) {
+        return map.containsKey(v);
+    }
+
+    /**
+     * Checks if there is an edge between two vertices.
+     *
+     * @param source The source vertex.
+     * @param dest The destination vertex.
+     * @return True if there is an edge between the vertices, otherwise false.
+     */
+    public boolean hasEdge(Vertex<T> source, Vertex<T> dest) {
+        if (!hasVertex(source)) return false;
+        return map.get(source).contains(dest);
+    }
+
+    /**
+     * Gets the adjacency list of a vertex.
+     *
+     * @param v The vertex.
+     * @return The list of adjacent vertices.
+     */
+    public List<Vertex<T>> adjacencyList(Vertex<T> v) {
+        if (!hasVertex(v)) return null;
+        return map.get(v);
+    }
+
+    /**
+     * Gets the count of vertices in the graph.
+     *
+     * @return The count of vertices.
+     */
+    public int getVerticesCount() {
+        return map.size();
+    }
+
+    /**
+     * Gets the count of edges in the graph.
+     *
+     * @return The count of edges.
+     */
+    public int getEdgesCount() {
+        int count = 0;
+        for (Vertex<T> v : map.keySet()) {
+            count += map.get(v).size();
+        }
+        if (undirected)
+            count /= 2;
+        return count;
+    }
+}
