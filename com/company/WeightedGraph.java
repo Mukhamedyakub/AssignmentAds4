@@ -46,4 +46,45 @@ public class WeightedGraph<T> {
      * @param dest The destination vertex data.
      * @param weight The weight of the edge.
      */
+    public void addEdge(T source, T dest, double weight) {
+        Vertex<T> v1 = new Vertex<>(source);
+        Vertex<T> v2 = new Vertex<>(dest);
+        if (!hasVertex(v1))
+            addVertex(source);
+        if (!hasVertex(v2))
+            addVertex(dest);
+        if (hasEdge(v1, v2) || v1.equals(v2))
+            return; // reject parallels & self-loops
+        map.get(v1).add(new Edge<>(v1, v2, weight));
+        if (undirected)
+            map.get(v2).add(new Edge<>(v2, v1, weight));
+    }
+
+    /**
+     * Checks if the graph contains a vertex.
+     *
+     * @param v The vertex to check.
+     * @return True if the vertex is in the graph, otherwise false.
+     */
+    public boolean hasVertex(Vertex<T> v) {
+        return map.containsKey(v);
+    }
+
+    /**
+     * Checks if there is an edge between two vertices.
+     *
+     * @param source The source vertex.
+     * @param dest The destination vertex.
+     * @return True if there is an edge between the vertices, otherwise false.
+     */
+    public boolean hasEdge(Vertex<T> source, Vertex<T> dest) {
+        if (!hasVertex(source)) return false;
+        for (Edge<T> edge : map.get(source)) {
+            if (edge.getDest().equals(dest)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
