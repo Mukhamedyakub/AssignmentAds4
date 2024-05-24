@@ -87,4 +87,53 @@ public class WeightedGraph<T> {
         return false;
     }
 
+    /**
+     * Gets the adjacency list of a vertex.
+     *
+     * @param v The vertex.
+     * @return The list of adjacent vertices.
+     */
+    public List<Vertex<T>> adjacencyList(Vertex<T> v) {
+        if (!hasVertex(v)) return null;
+        List<Vertex<T>> vertices = new LinkedList<>();
+        for (Edge<T> e : map.get(v)) {
+            vertices.add(e.getDest());
+        }
+        return vertices;
+    }
 
+    /**
+     * Gets the edges connected to a vertex.
+     *
+     * @param v The vertex.
+     * @return The list of edges connected to the vertex.
+     */
+    public Iterable<Edge<T>> getEdges(Vertex<T> v) {
+        if (!hasVertex(v)) return null;
+        return map.get(v);
+    }
+
+    /**
+     * Gets the count of vertices in the graph.
+     *
+     * @return The count of vertices.
+     */
+    public int getVerticesCount() {
+        return map.size();
+    }
+
+    /**
+     * Gets the count of edges in the graph.
+     *
+     * @return The count of edges.
+     */
+    public int getEdgesCount() {
+        int count = 0;
+        for (Vertex<T> v : map.keySet()) {
+            count += map.get(v).size();
+        }
+        if (undirected)
+            count /= 2;
+        return count;
+    }
+}
