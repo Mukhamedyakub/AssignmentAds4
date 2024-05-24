@@ -28,30 +28,3 @@ public class Vertex<T> {
         return data;
     }
 
-    /**
-     * Sets the data of the vertex.
-     *
-     * @param data The data of the vertex.
-     */
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vertex<?> vertex = (Vertex<?>) o;
-        return Objects.equals(data, vertex.data);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(data);
-    }
-
-    @Override
-    public String toString() {
-        return data.toString();
-    }
-}
