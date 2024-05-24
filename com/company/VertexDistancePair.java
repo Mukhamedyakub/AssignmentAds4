@@ -9,4 +9,14 @@ class VertexDistancePair<T> {
     Vertex<T> vertex;
     double distance;
 
-
+    /**
+     * Constructor to create a VertexDistancePair.
+     *
+     * @param vertex The vertex.
+     * @param distance The distance to the vertex.
+     */
+    public VertexDistancePair(Vertex<T> vertex, double distance) {
+        this.vertex = vertex;
+        this.distance = distance;
+    }
+}
